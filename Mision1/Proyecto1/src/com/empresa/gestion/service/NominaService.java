@@ -6,20 +6,22 @@ import com.empresa.gestion.model.Empleado;
 public class NominaService {
     public double calcularSalarioAnual(Empleado empleado) {
         return empleado.getSalario() * 12;
-        
+
     }
 
-      public double calcularTotalNomina(double[] salarios){
-        double total=0;
-        for(int i=0;i<salarios.length;i++){
-            total+=salarios[i];
+    public double calcularTotalNomina(double[] salarios) {
+        double total = 0;
+        for (int i = 0; i < salarios.length; i++) {
+            total += salarios[i];
         }
         return total;
     }
-    public void simularPagos(int meses){
-    int contador=1;
-    while(contador<=meses){
-        System.out.println("Simulando pagos del mes "+ contador);
-        contador++;
+
+    public void simularPagos(int meses) {
+        int contador = 1;
+        while (contador <= meses) {
+            System.out.println("Simulando pagos del mes " + contador);
+            contador++;
+        }
     }
-}}
+}
