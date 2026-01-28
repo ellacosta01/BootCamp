@@ -5,13 +5,15 @@ public class Persona {
     protected int edad;
     protected boolean activo;// true false
     protected char genero;// 'M'   o 'F'
+    protected int id;
     
     //🧱 Constructor
-    public Persona(String nombre, int edad,boolean activo,char genero) {
+    public Persona(int id,String nombre, int edad,boolean activo,char genero) {
         this.nombre = nombre;
         this.edad = edad;
         this.activo= activo;
         this.genero=genero;
+        this.id = id;
     }
     public String getNombre() {
         return nombre;
@@ -42,4 +44,8 @@ public class Persona {
         System.out.println("Activo: " + activo);
         System.out.println("Género: "+ genero);
     }
+    public int getId() {
+        return id;
+    }
+    
 }
