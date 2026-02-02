@@ -6,7 +6,7 @@ import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-user.component',
-  imports: [JsonPipe,CommonModule],
+  imports: [],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
   //template: '<p> Hola desdes user.component.ts</p>',
