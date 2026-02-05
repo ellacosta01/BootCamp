@@ -1,0 +1,12 @@
+<h2>Servicio de Rick & Morty</h2>
+
+<p *ngIf="characters.length === 0">Cargando...</p>
+
+<div class="cards" *ngIf="characters.length > 0">
+  <div class="card" *ngFor="let c of characters">
+    <img [src]="c.image" [alt]="c.name">
+    <h3>{{ c.name }}</h3>
+    <p>Género: {{ c.gender }}</p>
+    <p>species: {{ c.species }}</p>
+  </div>
+</div>

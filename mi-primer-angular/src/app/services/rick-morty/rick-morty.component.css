@@ -1,0 +1,40 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid #ff0080;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  background: #fff;
+   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.card h3 {
+  margin: 8px 0 4px;
+  font-size: 16px;
+  color: #555;
+
+}
+h2 {
+  text-align: center;
+  color: #ff0080;
+}
+
+.card p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
