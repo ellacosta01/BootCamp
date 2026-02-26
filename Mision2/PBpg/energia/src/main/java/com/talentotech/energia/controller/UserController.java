@@ -1,63 +1,53 @@
 package com.talentotech.energia.controller;
+import com.talentotech.energia.dto.LoginRequest;
+import com.talentotech.energia.service.UserService;
 import com.talentotech.energia.model.User;
-import com.talentotech.energia.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 
 @RestController
 @RequestMapping("/api/users")
-
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-    private final UserRepository userRepository;
-    public UserController(UserRepository userRepository){
-        this.userRepository =userRepository;
-    }
-    @PostMapping
-    public User create(@RequestBody User user) {
-        
-        return userRepository.save(user);
-    }
-    @GetMapping
-    public List<User> findAll(){
-        return userRepository.findAll();
-    }
-    //READ BY ID
-    @GetMapping("/{id}")
-    public User findByID(@PathVariable Long id){
-        return userRepository.findById(id)
-        .orElseThrow(()-> new ResponseStatusException(
-            HttpStatus.NOT_FOUND,
-            "Usuario no encontrado"));
-    }
-    // UPDATE
-    @PutMapping("/{id}")
-    public User update(@PathVariable Long id, @RequestBody User userDetails){
-        User user = userRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        if(userDetails.getUsername()!=null &&
-        !userDetails.getUsername().trim().isEmpty()){
-        user.setUsername(userDetails.getUsername());
-        }
-          if(userDetails.getEmail()!=null &&
-        !userDetails.getEmail().trim().isEmpty()){
-          user.setEmail(userDetails.getEmail());
-        }
-         if(userDetails.getPassword()!=null &&
-        !userDetails.getPassword().trim().isEmpty()){
-          user.setPassword(userDetails.getPassword());
-        }
-            
-          user.setRole(userDetails.getRole());
-        
-        
-        return userRepository.save(user);
+  private final UserService userService;
 
-    }
-    
-      
-    
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
+
+  @GetMapping
+  public List<User> getAllUsers() {
+    return userService.findAll();
+  }
+
+  @GetMapping("/{id}")
+  public User getUserById(@PathVariable Long id) {
+    return userService.findById(id);
+  }
+
+  @PostMapping
+  public ResponseEntity<User> createUser(@RequestBody User user) {
+    return ResponseEntity.status(HttpStatus.CREATED)
+    .body(userService.createUser(user));
+  }
+  
+  @PutMapping("/{id}")
+  public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    return userService.updateUser(id, user);
+  }
+  
+  @DeleteMapping("/{id}")
+  public void deleteUser(@PathVariable Long id) {
+    userService.deleteUser(id);
+  }
+
+  @PostMapping("/login")
+  public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+      String response = userService.login(request);
+      return ResponseEntity.ok(response);
+  }
+  
 }
